@@ -1367,7 +1367,7 @@ module Azure
       end
 
       def call(method, uri, body=nil, headers=nil)
-        # Synchronize body and header encoding; header['Content-Encoding'] takes precedence. 
+        # Synchronize body and header encoding; header['Content-Encoding'] takes precedence.
         if headers && !body.nil?
           if headers['Content-Encoding'].nil?
             headers['Content-Encoding'] = body.encoding.to_s if body.respond_to? :encoding # String
@@ -1378,8 +1378,8 @@ module Azure
           end
 
           # Azure Storage Service expects content-encoding to be lowercase.
-          # Authentication will fail otherwise.  
-          headers['Content-Encoding'].downcase!
+          # Authentication will fail otherwise.
+          headers['Content-Encoding'] = headers['Content-Encoding'].downcase
         end
 
         response = super
